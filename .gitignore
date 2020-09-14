@@ -1,0 +1,15 @@
+Makefile.env
+testrunner
+*.swp
+*.pdf
+*.o
+*.a
+*~
+*#
+opt.txt
+*.gcda
+*.gcno
+coverage.info
+coverage/
+test_out_debug/
+test_out_opt/
