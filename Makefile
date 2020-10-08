@@ -56,9 +56,11 @@ $(OBJECTS_OPT): $(OBJDIR_OPT)/%.o: %$(SRC_EXTENSION)
 	$(CC) -c $(CFLAGS) $(OPTIMIZEFLAGS) $(INCLUDELINE) $(LIBLINE) -o $@ $< $(LIBNAMELINE)
 
 debug: clean_profile $(OBJECTS_DEBUG)
+	mkdir -p $(OUTLIBDIR)
 	ar rcs $(OUTLIBDIR)/lib$(OUTLIBNAME_DEBUG).a $(OBJECTS_DEBUG)
 
 opt: $(OBJECTS_OPT)
+	mkdir -p $(OUTLIBDIR)
 	ar rcs $(OUTLIBDIR)/lib$(OUTLIBNAME_OPT).a $(OBJECTS_OPT)
 
 test: clean_test debug
