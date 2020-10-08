@@ -64,7 +64,8 @@ opt: $(OBJECTS_OPT)
 	ar rcs $(OUTLIBDIR)/lib$(OUTLIBNAME_OPT).a $(OBJECTS_OPT)
 
 test: clean_test debug
-	cxxtestgen --error-printer -o $(TEST_DEBUG_OUTDIR)/tests.cpp $(TEST_SOURCES)
+	mkdir -p $(TEST_DEBUG_OUTDIR)
+	$(CXXTESTDIR)/bin/cxxtestgen --error-printer -o $(TEST_DEBUG_OUTDIR)/tests.cpp $(TEST_SOURCES)
 	$(CPP) $(CPPFLAGS) $(DEBUGFLAGS) $(PROFILEFLAGS) $(TEST_INCLUDELINE) $(TEST_LIBLINE) -o $(TEST_DEBUG_OUTDIR)/tests.o $(TEST_DEBUG_OUTDIR)/tests.cpp $(TEST_DEBUG_LIBNAMELINE)
 	$(TEST_DEBUG_OUTDIR)/tests.o -v
 
@@ -73,7 +74,8 @@ coverage: test
 	genhtml coverage.info -q --output-directory coverage
 
 test_opt: clean_test opt
-	cxxtestgen --error-printer -o $(TEST_OPT_OUTDIR)/tests.cpp $(TEST_SOURCES)
+	mkdir -p $(TEST_OPT_OUTDIR)
+	$(CXXTESTDIR)/bin/cxxtestgen --error-printer -o $(TEST_OPT_OUTDIR)/tests.cpp $(TEST_SOURCES)
 	$(CPP) $(CPPFLAGS) $(OPTIMIZEFLAGS) $(TEST_INCLUDELINE) $(TEST_LIBLINE) -o $(TEST_OPT_OUTDIR)/tests.o $(TEST_OPT_OUTDIR)/tests.cpp $(TEST_OPT_LIBNAMELINE)
 	$(TEST_OPT_OUTDIR)/tests.o -v
 
